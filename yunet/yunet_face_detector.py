@@ -10,13 +10,29 @@ class YuNetFaceDetector:
     def __init__(self, scale = 1.0):
         self._scale = scale
 
+        # Valid combinations of backends and targets
+        backend_target_pairs = [
+            [cv.dnn.DNN_BACKEND_OPENCV, cv.dnn.DNN_TARGET_CPU],         # 0: OpenCV + CPU
+            [cv.dnn.DNN_BACKEND_CUDA,   cv.dnn.DNN_TARGET_CUDA],        # 1: CUDA + GPU (CUDA)
+            [cv.dnn.DNN_BACKEND_CUDA,   cv.dnn.DNN_TARGET_CUDA_FP16],   # 2: CUDA + GPU (CUDA FP16)
+            [cv.dnn.DNN_BACKEND_TIMVX,  cv.dnn.DNN_TARGET_NPU],         # 3: TIM-VX + NPU
+            [cv.dnn.DNN_BACKEND_CANN,   cv.dnn.DNN_TARGET_NPU]          # 4: CANN + NPU
+        ]
+
+        backend_target = 0
+
+        backend_id = backend_target_pairs[backend_target][0]
+        target_id = backend_target_pairs[backend_target][1]
+
         self._detector = cv.FaceDetectorYN.create(
             "yunet/models/face_detection_yunet_2022mar.onnx",
             "",
             (320, 320),
             _CONFIDENCE_THRESHOLD,
             _NMS_THRESHOLD,
-            _TOP_K
+            _TOP_K,
+            backend_id,
+            target_id
         )
 
     def set_input_image_size(self, width, height):
