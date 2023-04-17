@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import cv2 as cv
 
@@ -25,7 +26,7 @@ class YuNetFaceDetector:
         target_id = backend_target_pairs[backend_target][1]
 
         self._detector = cv.FaceDetectorYN.create(
-            "yunet/models/face_detection_yunet_2022mar.onnx",
+            os.path.join(os.path.dirname(__file__), "models/face_detection_yunet_2022mar.onnx"),
             "",
             (320, 320),
             _CONFIDENCE_THRESHOLD,
