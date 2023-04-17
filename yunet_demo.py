@@ -48,9 +48,9 @@ if __name__ == "__main__":
 
         draw_face_rects(frame, faces, (0, 255, 0))
 
-        cv.putText(frame, 'FPS: {:.2f}'.format(tm.getFPS()), (1, 16), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        cv.putText(frame, "FPS: {:.2f}".format(tm.getFPS()), (1, 16), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
-        cv.imshow('Face Detection', frame)
+        cv.imshow("Face Detection", frame)
 
         key = cv.waitKey(30)
         if key == 27:
