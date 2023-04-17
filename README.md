@@ -1,4 +1,4 @@
-# Face-Detection
+# Face Detection
 
 This repository includes the implementation of face detection based on `Haarcascades` and `YuNet` models.
 
